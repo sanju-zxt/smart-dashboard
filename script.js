@@ -14,19 +14,12 @@ fetch(sheetURL)
 
     console.log("ROW:", row);
 
-    // 🔥 Dynamically detect correct keys (handles spaces + case issues)
-    const attendanceKey = Object.keys(row).find(k => k.trim().toLowerCase() === "attendance");
-    const tasksKey = Object.keys(row).find(k => k.trim().toLowerCase() === "tasks");
+    // ✅ HANDLE BOTH SPELLINGS (IMPORTANT FIX)
+    const attendance = parseInt(
+      row["Attendance"] || row["Attendence"]
+    );
 
-    console.log("Detected Keys:", attendanceKey, tasksKey);
-
-    if (!attendanceKey || !tasksKey) {
-      throw new Error("Column names not matching");
-    }
-
-    // 🔥 Clean values (removes unwanted characters like 60q → 60)
-    const attendance = parseInt(String(row[attendanceKey]).replace(/[^0-9]/g, ""));
-    const tasks = parseInt(String(row[tasksKey]).replace(/[^0-9]/g, ""));
+    const tasks = parseInt(row["Tasks"]);
 
     console.log("Parsed:", attendance, tasks);
 
@@ -36,14 +29,14 @@ fetch(sheetURL)
 
     const productivity = Math.round((attendance + tasks) / 2);
 
-    // ✅ Update UI
+    // ✅ UI UPDATE
     document.getElementById("attendance").innerText = attendance + "%";
     document.getElementById("tasks").innerText = tasks;
     document.getElementById("productivity").innerText = productivity + "%";
 
     document.getElementById("attendance-bar").style.width = attendance + "%";
 
-    // ✅ Status logic
+    // ✅ STATUS
     let status =
       attendance >= 85 ? "🔥 Excellent" :
       attendance >= 70 ? "⚡ Good" :
@@ -51,13 +44,26 @@ fetch(sheetURL)
 
     document.getElementById("status").innerText = status;
 
+    // ✅ CHART
+    const ctx = document.getElementById("chart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Attendance", "Tasks"],
+        datasets: [{
+          label: "Performance",
+          data: [attendance, tasks]
+        }]
+      }
+    });
+
   })
   .catch(err => {
     console.error("FINAL ERROR:", err);
 
-    // ❌ Show fallback UI instead of breaking
-    document.getElementById("attendance").innerText = "Check Data";
-    document.getElementById("tasks").innerText = "Check Data";
+    document.getElementById("attendance").innerText = "Error";
+    document.getElementById("tasks").innerText = "Error";
     document.getElementById("productivity").innerText = "--%";
-    document.getElementById("status").innerText = "Debug Console";
+    document.getElementById("status").innerText = "Check Console";
   });
