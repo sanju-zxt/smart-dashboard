@@ -4,31 +4,23 @@ fetch(sheetURL)
   .then(res => res.json())
   .then(data => {
 
-    console.log("RAW DATA:", data);
+    console.log("DATA RECEIVED:", data);
 
     if (!data || data.length === 0) {
-      throw new Error("No data found");
+      throw new Error("No data");
     }
 
     const row = data[0];
 
-    // 🔥 Detect keys dynamically (handles spacing, case issues)
-    const keys = Object.keys(row);
-    console.log("Keys detected:", keys);
+    // 🔥 DIRECT + SAFE ACCESS
+    const attendance = Number(row.Attendance);
+    const tasks = Number(row.Tasks);
 
-    const attendanceKey = keys.find(k => k.trim().toLowerCase() === "attendance");
-    const tasksKey = keys.find(k => k.trim().toLowerCase() === "tasks");
+    console.log("Attendance:", attendance);
+    console.log("Tasks:", tasks);
 
-    if (!attendanceKey || !tasksKey) {
-      throw new Error("Column names not matching");
-    }
-
-    // 🔥 Clean values (removes unwanted characters)
-    const attendance = parseInt(String(row[attendanceKey]).replace(/[^0-9]/g, ""));
-    const tasks = parseInt(String(row[tasksKey]).replace(/[^0-9]/g, ""));
-
-    if (isNaN(attendance) || isNaN(tasks)) {
-      throw new Error("Invalid numeric data");
+    if (!attendance || !tasks) {
+      throw new Error("Values not parsed");
     }
 
     const productivity = Math.round((attendance + tasks) / 2);
@@ -48,9 +40,9 @@ fetch(sheetURL)
 
   })
   .catch(err => {
-    console.error("FINAL ERROR:", err);
+    console.error("REAL ERROR:", err);
 
-    document.getElementById("attendance").innerText = "Check Data";
-    document.getElementById("tasks").innerText = "Check Data";
-    document.getElementById("status").innerText = "Debug Console";
+    document.getElementById("attendance").innerText = "Debug";
+    document.getElementById("tasks").innerText = "Debug";
+    document.getElementById("status").innerText = "Check Console";
   });
