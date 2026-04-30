@@ -1,8 +1,10 @@
 const sheetURL = "https://opensheet.elk.sh/1Bk7cAPgNqMlKKoryqecURyG2aP2gDZioEGQbAHODaPE/Sheet1";
 
 fetch(sheetURL)
-  .then(res => res.json())
+  .then(response => response.json())
   .then(data => {
+    console.log("Fetched Data:", data); // debug
+
     const attendance = parseInt(data[0].Attendance);
     const tasks = parseInt(data[0].Tasks);
     const productivity = Math.round((attendance + tasks) / 2);
@@ -28,4 +30,7 @@ fetch(sheetURL)
     const statusElement = document.getElementById("status");
     statusElement.innerText = statusText;
     statusElement.style.color = statusColor;
+  })
+  .catch(error => {
+    console.error("Error fetching data:", error);
   });
