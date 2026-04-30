@@ -1,29 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Smart Dashboard</title>
+  <meta charset="UTF-8">
+  <title>Smart Dashboard | Sanju</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <h1>Sanju Dashboard 🚀</h1>
-  <p>Live Student Productivity Tracker</p>
+<div class="main">
+  <header>
+    <h1>🚀 Smart Dashboard</h1>
+    <p>Cloud-based Student Monitoring System</p>
+  </header>
 
-  <div class="card">
-    <h3>Attendance</h3>
-    <p id="attendance">Loading...</p>
+  <div class="grid">
+
+    <div class="card">
+      <h3>📊 Attendance</h3>
+      <p id="attendance">--%</p>
+    </div>
+
+    <div class="card">
+      <h3>✅ Tasks</h3>
+      <p id="tasks">--</p>
+    </div>
+
+    <div class="card">
+      <h3>⚡ Productivity</h3>
+      <p id="productivity">--%</p>
+    </div>
+
+    <div class="card status-card">
+      <h3>📌 Status</h3>
+      <p id="status">Analyzing...</p>
+    </div>
+
   </div>
 
-  <div class="card">
-    <h3>Tasks Completed</h3>
-    <p id="tasks">Loading...</p>
-  </div>
-
-  <div class="card">
-    <h3>Status</h3>
-    <p id="status">Analyzing...</p>
-  </div>
+  <footer>
+    <p>Built by Sanju | Azure + GitHub</p>
+  </footer>
 </div>
 
 <script src="script.js"></script>
