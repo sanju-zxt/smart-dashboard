@@ -1,28 +1,31 @@
-// Simulated dynamic data
-let attendance = 82;
-let tasks = 18;
-let productivity = Math.round((attendance + tasks) / 2);
+const sheetURL = "https://opensheet.elk.sh/YOUR_SHEET_ID/Sheet1";
 
-// Update UI
-document.getElementById("attendance").innerText = attendance + "%";
-document.getElementById("tasks").innerText = tasks;
-document.getElementById("productivity").innerText = productivity + "%";
+fetch(sheetURL)
+  .then(res => res.json())
+  .then(data => {
+    const attendance = parseInt(data[0].Attendance);
+    const tasks = parseInt(data[0].Tasks);
+    const productivity = Math.round((attendance + tasks) / 2);
 
-// Smart status logic
-let statusText = "";
-let statusColor = "";
+    document.getElementById("attendance").innerText = attendance + "%";
+    document.getElementById("tasks").innerText = tasks;
+    document.getElementById("productivity").innerText = productivity + "%";
 
-if (attendance >= 85 && tasks >= 15) {
-  statusText = "🔥 Excellent Performance";
-  statusColor = "#22c55e";
-} else if (attendance >= 70) {
-  statusText = "⚡ Good Progress";
-  statusColor = "#eab308";
-} else {
-  statusText = "⚠ Needs Improvement";
-  statusColor = "#ef4444";
-}
+    let statusText = "";
+    let statusColor = "";
 
-const statusElement = document.getElementById("status");
-statusElement.innerText = statusText;
-statusElement.style.color = statusColor;
+    if (attendance >= 85 && tasks >= 15) {
+      statusText = "🔥 Excellent";
+      statusColor = "#22c55e";
+    } else if (attendance >= 70) {
+      statusText = "⚡ Good Progress";
+      statusColor = "#eab308";
+    } else {
+      statusText = "⚠ Needs Improvement";
+      statusColor = "#ef4444";
+    }
+
+    const statusElement = document.getElementById("status");
+    statusElement.innerText = statusText;
+    statusElement.style.color = statusColor;
+  });
