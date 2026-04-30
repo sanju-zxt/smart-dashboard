@@ -4,17 +4,17 @@ fetch(sheetURL)
   .then(res => res.json())
   .then(data => {
 
-    console.log(data);
+    console.log("DATA:", data);
 
-    // SAFE ACCESS (handles spacing issues)
     const row = data[0];
 
-    const attendance = parseInt(row["Attendance"] || row["attendance"]);
-    const tasks = parseInt(row["Tasks"] || row["tasks"]);
+    // DIRECT ACCESS (since your keys are correct now)
+    const attendance = parseInt(row.Attendance);
+    const tasks = parseInt(row.Tasks);
 
     if (isNaN(attendance) || isNaN(tasks)) {
-      document.getElementById("attendance").innerText = "Fix Sheet";
-      document.getElementById("tasks").innerText = "Fix Sheet";
+      document.getElementById("attendance").innerText = "Error";
+      document.getElementById("tasks").innerText = "Error";
       return;
     }
 
@@ -26,11 +26,14 @@ fetch(sheetURL)
 
     document.getElementById("attendance-bar").style.width = attendance + "%";
 
-    let status = attendance >= 85 ? "🔥 Excellent" :
-                 attendance >= 70 ? "⚡ Good" :
-                 "⚠ Low";
+    let status = attendance >= 85 ? "🔥 Excellent"
+               : attendance >= 70 ? "⚡ Good"
+               : "⚠ Low";
 
     document.getElementById("status").innerText = status;
 
   })
-  .catch(err => console.error(err));
+  .catch(err => {
+    console.error(err);
+    document.getElementById("attendance").innerText = "API Error";
+  });
