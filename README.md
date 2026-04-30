@@ -10,85 +10,46 @@ A **cloud-based student performance dashboard** that tracks attendance, tasks, a
 
 ---
 
-## 📸 Preview
-
-A modern dashboard with authentication, live data, and performance visualization.
-
----
-
 ## 📌 Overview
 
-The **Smart Student Monitoring System** is a lightweight full-stack web application designed to:
-
-* Track student performance
-* Visualize key metrics
-* Provide real-time insights
-* Ensure secure access using authentication
-
-It demonstrates **practical integration of frontend + cloud services**, making it suitable for real-world deployment scenarios.
+This project is a **modern web dashboard** designed to monitor student performance efficiently.
+It integrates **authentication, real-time data fetching, and visualization** into a clean UI.
 
 ---
 
 ## ✨ Features
 
-* 🔐 **Secure Authentication**
-
-  * Firebase-based login & signup
-  * Protected dashboard routes
-
-* 📊 **Live Data Integration**
-
-  * Fetches real-time data from Google Sheets
-  * No backend server required
-
-* 📈 **Interactive Dashboard**
-
-  * Attendance tracking
-  * Task monitoring
-  * Productivity calculation
-  * Status indicator
-
-* 🧠 **Smart Data Handling**
-
-  * Handles column typos (e.g., *Attendence*)
-  * Cleans invalid values automatically
-
-* ⚡ **Enhanced User Experience**
-
-  * Loading state
-  * Error handling
-  * Responsive layout
-
-* 🌐 **Cloud Deployment**
-
-  * Hosted using GitHub Pages
-  * Fully accessible online
+* 🔐 **User Authentication (Firebase)**
+* 📊 **Real-time Data from Google Sheets**
+* 📈 **Performance Visualization (Chart.js)**
+* ⚡ **Dynamic Status Indicator**
+* ⏳ **Loading State + Error Handling**
+* 🌐 **Deployed on GitHub Pages**
+* 🧠 **Smart Data Parsing (handles errors & typos)**
 
 ---
 
 ## 🛠 Tech Stack
 
-| Category    | Technology              |
-| ----------- | ----------------------- |
-| Frontend    | HTML, CSS, JavaScript   |
-| Auth        | Firebase Authentication |
-| Data Source | Google Sheets API       |
-| Charts      | Chart.js                |
-| Hosting     | GitHub Pages            |
+* **Frontend:** HTML, CSS, JavaScript
+* **Authentication:** Firebase Auth
+* **Database:** Google Sheets API
+* **Visualization:** Chart.js
+* **Hosting:** GitHub Pages
 
 ---
 
 ## 📂 Project Structure
 
-```id="struct"
+```
 smart-dashboard/
 │
-├── index.html        # Redirects to login page
-├── login.html        # User authentication
-├── dashboard.html    # Main dashboard UI
+├── index.html        # Redirect to login
+├── login.html        # Authentication page
+├── dashboard.html    # Main dashboard
 ├── auth.js           # Firebase authentication logic
-├── script.js         # Data fetching & UI updates
-├── style.css         # Styling and layout
+├── script.js         # Data fetching + UI logic
+├── style.css         # Styling
 └── README.md
 ```
 
@@ -96,29 +57,26 @@ smart-dashboard/
 
 ## 🔐 Authentication Flow
 
-```id="flow"
-User → Login Page → Firebase Auth → Dashboard Access
-                         ↓
-                   Unauthorized → Redirect to Login
-```
-
-* Only authenticated users can access the dashboard
-* Session is maintained using Firebase
+1. User logs in via Firebase
+2. Redirected to dashboard
+3. Dashboard is protected (no login → no access)
+4. Logout returns to login page
 
 ---
 
 ## 📊 Data Flow
 
-1. Data stored in **Google Sheets**
-2. Accessed via API:
+* Data stored in **Google Sheets**
+* Fetched using API:
 
-   ```
-   https://opensheet.elk.sh/{sheet_id}/Sheet1
-   ```
-3. Parsed and displayed dynamically
+  ```
+  https://opensheet.elk.sh/{sheet_id}/Sheet1
+  ```
+* Parsed dynamically (handles:
 
-✔ No backend server required
-✔ Fully cloud-based architecture
+  * spelling issues like *Attendence*
+  * invalid values
+    )
 
 ---
 
@@ -134,21 +92,15 @@ User → Login Page → Firebase Auth → Dashboard Access
 
 ## 🚀 Setup & Run Locally
 
-1. Clone the repository:
+1. Clone repo:
 
-```bash id="clone"
+```bash
 git clone https://github.com/sanju-zxt/smart-dashboard.git
 ```
 
-2. Open the project folder
+2. Open `login.html` in browser
 
-3. Run:
-
-```id="run"
-Open login.html in your browser
-```
-
-4. (Optional) Configure your own Firebase project
+3. Configure Firebase (if needed)
 
 ---
 
@@ -156,17 +108,17 @@ Open login.html in your browser
 
 * 🎓 Colleges & Universities
 * 🏫 Coaching Institutes
-* 📊 Student Performance Tracking
-* 📈 Productivity Monitoring Systems
+* 📊 Student Productivity Tracking
+* 📈 Performance Monitoring Systems
 
 ---
 
-## 🔮 Future Enhancements
+## 🔮 Future Improvements
 
-* 👤 User-specific dashboards (each user sees own data)
-* 🛠 Admin panel for managing data
+* 👤 User-specific dashboards
+* 🛠 Admin panel for editing data
 * 📩 Automated email alerts
-* 🤖 AI-based performance predictions
+* 🤖 AI-based performance prediction
 
 ---
 
@@ -177,16 +129,12 @@ Open login.html in your browser
 
 ---
 
-## ⭐ Support
+## ⭐ If you like this project
 
-If you found this project useful:
-
-* ⭐ Star the repository
-* 🍴 Fork it
-* 📢 Share it
+Give it a ⭐ on GitHub and share your feedback!
 
 ---
 
-## 📄 License
+📄 License
 
 This project is open-source and available under the MIT License.
