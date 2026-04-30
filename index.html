@@ -12,34 +12,29 @@
 
   <header>
     <h1>🚀 Smart Student Monitoring System</h1>
-    <p>● Live Data + Automated Alerts Enabled</p>
+    <p class="live-badge">● Live Data + Automated Alerts Enabled</p>
   </header>
 
   <div class="grid">
 
-    <!-- Attendance -->
     <div class="card">
       <h3>📊 Attendance</h3>
       <p id="attendance">--%</p>
-
       <div class="progress">
         <div id="attendance-bar" class="progress-fill"></div>
       </div>
     </div>
 
-    <!-- Tasks -->
     <div class="card">
       <h3>✅ Tasks</h3>
       <p id="tasks">--</p>
     </div>
 
-    <!-- Productivity -->
     <div class="card">
       <h3>⚡ Productivity</h3>
       <p id="productivity">--%</p>
     </div>
 
-    <!-- Status -->
     <div class="card">
       <h3>📌 Status</h3>
       <p id="status">Analyzing...</p>
@@ -47,26 +42,21 @@
 
   </div>
 
-  <!-- Feature Highlights -->
-  <p style="margin-top:20px; opacity:0.7;">
+  <p class="features">
     ✔ Automated Email Alerts | ✔ Multi-user Tracking | ✔ Cloud Integrated
   </p>
 
-  <!-- Chart Section -->
-  <div style="margin-top:40px;">
+  <div class="chart-box">
     <canvas id="chart"></canvas>
   </div>
 
   <footer>
-    <p>Built by Sanju | Cloud + Automation Project</p>
+    <p>Built by Sanju | Cloud + Automation</p>
   </footer>
 
 </div>
 
-<!-- Chart JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Your Script -->
 <script src="script.js"></script>
 
 </body>
