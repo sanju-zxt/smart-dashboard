@@ -20,7 +20,7 @@ A cloud-based automation system that tracks student performance and sends real-t
 - Training Institutes
 
 ## 🌐 Live Demo
-https://YOUR-USERNAME.github.io/smart-dashboard/
+https://sanju-zxt.github.io/smart-dashboard/
 
 ## 👨‍💻 Author
 Sanju
