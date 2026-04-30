@@ -43,9 +43,12 @@ fetch(sheetURL)
         labels: ["Attendance", "Tasks"],
         datasets: [{
           label: "Performance",
-          data: [attendance, tasks],
+          data: [attendance, tasks]
         }]
       }
     });
 
+  })
+  .catch(err => {
+    console.error("Error:", err);
   });
