@@ -4,18 +4,28 @@ fetch(sheetURL)
   .then(res => res.json())
   .then(data => {
 
-    const attendance = parseInt(data[0].Attendance);
-    const tasks = parseInt(data[0].Tasks);
+    console.log("DATA:", data); // debug
+
+    // NEW STRUCTURE
+    const attendance = parseInt(data[0]["Attendance"]);
+    const tasks = parseInt(data[0]["Tasks"]);
+
+    // SAFETY CHECK
+    if (isNaN(attendance) || isNaN(tasks)) {
+      document.getElementById("attendance").innerText = "Error";
+      document.getElementById("tasks").innerText = "Error";
+      return;
+    }
+
     const productivity = Math.round((attendance + tasks) / 2);
 
     document.getElementById("attendance").innerText = attendance + "%";
     document.getElementById("tasks").innerText = tasks;
     document.getElementById("productivity").innerText = productivity + "%";
 
-    // Progress bar
     document.getElementById("attendance-bar").style.width = attendance + "%";
 
-    // Status logic
+    // STATUS
     let statusText = "";
     let statusColor = "";
 
@@ -34,7 +44,7 @@ fetch(sheetURL)
     statusElement.innerText = statusText;
     statusElement.style.color = statusColor;
 
-    // Chart
+    // CHART
     const ctx = document.getElementById("chart").getContext("2d");
 
     new Chart(ctx, {
