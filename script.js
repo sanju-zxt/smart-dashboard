@@ -4,16 +4,17 @@ fetch(sheetURL)
   .then(res => res.json())
   .then(data => {
 
-    console.log("DATA:", data); // debug
+    console.log(data);
 
-    // NEW STRUCTURE
-    const attendance = parseInt(data[0]["Attendance"]);
-    const tasks = parseInt(data[0]["Tasks"]);
+    // SAFE ACCESS (handles spacing issues)
+    const row = data[0];
 
-    // SAFETY CHECK
+    const attendance = parseInt(row["Attendance"] || row["attendance"]);
+    const tasks = parseInt(row["Tasks"] || row["tasks"]);
+
     if (isNaN(attendance) || isNaN(tasks)) {
-      document.getElementById("attendance").innerText = "Error";
-      document.getElementById("tasks").innerText = "Error";
+      document.getElementById("attendance").innerText = "Fix Sheet";
+      document.getElementById("tasks").innerText = "Fix Sheet";
       return;
     }
 
@@ -25,40 +26,11 @@ fetch(sheetURL)
 
     document.getElementById("attendance-bar").style.width = attendance + "%";
 
-    // STATUS
-    let statusText = "";
-    let statusColor = "";
+    let status = attendance >= 85 ? "🔥 Excellent" :
+                 attendance >= 70 ? "⚡ Good" :
+                 "⚠ Low";
 
-    if (attendance >= 85) {
-      statusText = "🔥 Excellent";
-      statusColor = "#22c55e";
-    } else if (attendance >= 70) {
-      statusText = "⚡ Good";
-      statusColor = "#eab308";
-    } else {
-      statusText = "⚠ Low";
-      statusColor = "#ef4444";
-    }
-
-    const statusElement = document.getElementById("status");
-    statusElement.innerText = statusText;
-    statusElement.style.color = statusColor;
-
-    // CHART
-    const ctx = document.getElementById("chart").getContext("2d");
-
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Attendance", "Tasks"],
-        datasets: [{
-          label: "Performance",
-          data: [attendance, tasks]
-        }]
-      }
-    });
+    document.getElementById("status").innerText = status;
 
   })
-  .catch(err => {
-    console.error("Error:", err);
-  });
+  .catch(err => console.error(err));
